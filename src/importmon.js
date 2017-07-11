@@ -34,9 +34,8 @@ export default class GetPoke extends Component{
                         def: response.data.defense,
                         spdef: response.data.sp_def,
                         spd: response.data.speed
-                    }
-
-                this.addList(obj);
+                  }
+                  this.addList(obj);
               })
         }
     }
@@ -49,7 +48,7 @@ export default class GetPoke extends Component{
     render(){
         return(
             <div>
-                <DisplayList list={this.state.list}/>
+                <DisplayList list={this.state.list} input={this.props.input.value}/>
             </div>
         );
     }
@@ -57,17 +56,21 @@ export default class GetPoke extends Component{
 
 class DisplayList extends Component{
     render(){
-
         var sorted = this.props.list;
-        sorted = _.orderBy(sorted, ['bst'],['desc']); // Use Lodash to sort array by 'name'
+
+        sorted = _.orderBy(sorted, [this.props.input],['desc']); // Use Lodash to sort array by 'name'
         // this.setState({list: chars})
         const pokelist = sorted.map( (pokemon,index) => {
-        return <h3 key={index}>{pokemon.name}<img src={pokemon.pic}></img></h3>;
+        return <h3 key={index}>{pokemon.name}<img src={pokemon.pic} id='pokepic'></img></h3>;
       });
         return(
             <div>
-                    {pokelist}
+                {pokelist}
             </div>
         )
     }
 }
+
+
+
+
