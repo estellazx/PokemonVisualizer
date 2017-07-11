@@ -19,7 +19,7 @@ export default class GetPoke extends Component{
     }
     fetchPoke(endpoint, callback) {
         var x;
-        for(x = 1; x <= 151; x++){
+        for(x = 1; x <= 10; x++){
             var url = this.BASE_URL + "/api/v1/pokemon/" + x+"/";
             axios.get(url)
               .then((response) => {
@@ -61,10 +61,10 @@ class DisplayList extends Component{
         sorted = _.orderBy(sorted, [this.props.input],['desc']); // Use Lodash to sort array by 'name'
         // this.setState({list: chars})
         const pokelist = sorted.map( (pokemon,index) => {
-        return <h3 key={index}>{pokemon.name}<img src={pokemon.pic} id='pokepic'></img></h3>;
+        return <div key={index} id='row'><h3 key={pokemon.name} className='pokeinfo'>{pokemon.name}<img src={pokemon.pic} id='pokepic'></img></h3></div>;
       });
         return(
-            <div>
+            <div id="list">
                 {pokelist}
             </div>
         )

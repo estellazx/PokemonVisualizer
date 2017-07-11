@@ -8,19 +8,20 @@ export default class PickCat extends Component{
         var options = [
           { value: 'bst', label: 'Total Base Stats' },
           { value: 'atk', label: 'Attack' },
-          { value: 'spd', label: 'Speed' },
+          { value: 'spatk', label: 'Special Attack' },
           { value: 'def', label: 'Defense' },
           { value: 'spdef', label: 'Special Defense' },
-          { value: 'spatk', label: 'Special Attack' }
+          { value: 'spd', label: 'Speed' }
         ];
-          console.log(this.props);
         return(
+          <div id="dropdown">
             <Select
             name="form-field-name"
             value={this.props.input.value}
             options={options}
             onChange={this.props.logChange}
           />
+          </div>
         )
     }
 }

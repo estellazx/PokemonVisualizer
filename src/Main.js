@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import _ from 'lodash';
 import PickCat from './dropdown.js';
 import GetPoke from './importmon.js';
 
@@ -16,14 +14,15 @@ export default class Main extends Component{
         this.setState({
             input: val
         })
-        console.log("Selected: " + val);
     }
 	render(){
 		return(
 			<div>
 				<PickCat logChange={this.logChange} input={this.state.input}/>
-				{!!this.state.input.value && <GetPoke input={this.state.input}/>}
+				{<GetPoke input={this.state.input}/>}
 			</div>
 		)
 	}
 }
+
+// !!this.state.input.value && 
