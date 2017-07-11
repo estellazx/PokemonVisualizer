@@ -14,7 +14,7 @@ export default class PickCat extends Component{
           { value: 'spd', label: 'Speed' }
         ];
         return(
-          <div id="dropdown">
+          <div id="innerdropdown">
             <Select
             name="form-field-name"
             value={this.props.input.value}
