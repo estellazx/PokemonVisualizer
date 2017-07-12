@@ -18,7 +18,7 @@ export default class GetPoke extends Component {
     }
     fetchPoke(endpoint, callback) {
         var x;
-        for(x = 120; x <= 151; x++) {
+        for(x = 1; x <= 151; x++) {
             var url = this.BASE_URL + "/api/v1/pokemon/" + x + "/";
             axios.get(url)
             .then((response) => {
