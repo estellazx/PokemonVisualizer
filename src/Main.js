@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PickCat from './dropdown.js';
 import GetPoke from './importmon.js';
-import ClkPoke from './pokeinfo.js';
 
 export default class Main extends Component{
 	constructor(){
         super();
 		this.state = {
-			input: {}
+			input: { value: 'bst', label: 'Total Base Stats' }
 		}
 		this.logChange = this.logChange.bind(this);
     }

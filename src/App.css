@@ -11,7 +11,8 @@
 }
 
 h3{
-	/*float: left;*/
+	top: 3;
+	/*width: 20%;*/
 }
 
 .pokeinfo{
@@ -40,7 +41,13 @@ h3{
 	/*position:fixed;*/
 }
 
-#innerdropdown{
+#innerdropdown {
 	width:40%;
 	margin:0 auto;
+}
+
+#results {
+	float: right;
+	margin-right: 20px;
+	width: 30%;
 }
