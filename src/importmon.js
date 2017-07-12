@@ -18,26 +18,34 @@ export default class GetPoke extends Component {
     }
     fetchPoke(endpoint, callback) {
         var x;
-        for(x = 30; x <= 40; x++) {
+        for(x = 120; x <= 151; x++) {
             var url = this.BASE_URL + "/api/v1/pokemon/" + x + "/";
             axios.get(url)
             .then((response) => {
-                var bst = response.data.attack + response.data.hp + response.data.speed + response.data.sp_atk + response.data.sp_def;
+                var bst = response.data.attack + response.data.defense + response.data.hp + response.data.speed + response.data.sp_atk + response.data.sp_def;
                 var x, y; 
                 var type = '';
                 var ability = '';
                 for(x = 0; x < response.data.types.length; x++){
-                    type += response.data.types[x].name + " ";
+                    if(x===0){
+                        type += response.data.types[x].name;
+                    } else{
+                        type += ", " + response.data.types[x].name;
+                    }
                 }
                 for(y = 0; y < response.data.abilities.length; y++){
-                    ability += response.data.abilities[y].name + " ";
+                    if(y===0){
+                        ability += response.data.abilities[y].name;
+                    } else{
+                        ability += ", " + response.data.abilities[y].name;
+                    }
                 }
 
                 var obj = {
                     id: response.data.national_id,
                     name: response.data.name,
-                    //pic: 'images/official-artwork/'+response.data.national_id+".png",
-                    pic: 'images/researchnow.png',
+                    pic: 'images/official-artwork/'+response.data.national_id+".png",
+                    //pic: 'images/researchnow.png',
                     bst: bst,
                     hp: response.data.hp,
                     atk: response.data.attack,
@@ -61,9 +69,7 @@ export default class GetPoke extends Component {
     }
     render(){
         return(
-            <div>
-                <DisplayList list={this.state.list} input={this.props.input.value} showResults={this.state.showResults}/>
-            </div>
+            <DisplayList list={this.state.list} input={this.props.input.value} showResults={this.state.showResults}/>
         );
     }
 } 
@@ -75,9 +81,9 @@ class DisplayList extends Component {
         //this.setState({list: sorted})
         const pokelist = sorted.map( (pokemon,index) => {
             return (
-                <div id='row' key={index}>
-                    <DisplayListInfo pokemon={pokemon} key={index} rank={index}/>
-                </div>
+              <div id='row' key={index}>
+                <DisplayListInfo pokemon={pokemon} key={index} rank={index}/>
+              </div>
             )
         });
         return(
@@ -92,11 +98,24 @@ class Results extends Component {
     render() {
         return (
             <div id="results" className="search-results">
-                {this.props.rank}
-                {this.props.pokemon.name}
-                {this.props.pokemon.type}
-                {this.props.pokemon.ability}
-                {this.props.pokemon.atk}
+                <h4 id="res_type" className='moreinfo'>
+                    {"Type: " + this.props.pokemon.type}
+                </h4>
+                <h4 id="res_ability" className='moreinfo'>
+                    {"Abilities: " + this.props.pokemon.ability}
+                </h4>
+                <h4 id="res_stats" className='moreinfo'>
+                    {"Statistics: "}
+                    <lu>
+                        <li>{"Hp: " + this.props.pokemon.hp}</li>
+                        <li>{"Attack: " + this.props.pokemon.atk}</li>
+                        <li>{"Defense: " + this.props.pokemon.def}</li>
+                        <li>{"Special Attack: " + this.props.pokemon.spatk}</li>
+                        <li>{"Special Defense: " + this.props.pokemon.spdef}</li>
+                        <li>{"Speed: " + this.props.pokemon.spd}</li>
+                        <li>{"Total: " + this.props.pokemon.bst}</li>
+                    </lu>
+                </h4>
             </div>
         );
     }
@@ -106,23 +125,33 @@ class DisplayListInfo extends Component {
     constructor(){
         super();
         this.state = {
-            showResults: false
+            showResults: false,
+            rank: 0
         }
         this.onClick = this.onClick.bind(this);
+        this.getRank = this.getRank.bind(this);
     }
     onClick() {
         this.setState({ showResults: !this.state.showResults });
     }
-    render(){
+    getRank() {
+        var rank = "#" + (this.props.rank+1);
+        this.setState({
+            rank: rank
+        })
+    }
+    render() {
         return(
-            <div>
+            <div id="rowInner">
                 {this.state.showResults ? <Results pokemon={this.props.pokemon} rank={this.props.rank}/> : null }
                 <div className='pokeinfo' onClick={this.onClick}>
                     <h3 key={this.props.pokemon.name} id="pokename" >
+                        {"#" + (this.props.rank+1) + " "}
                         {this.props.pokemon.name}
-                        
                     </h3>
-                    <img src={this.props.pokemon.pic} id='pokepic'></img>
+                    <div id="image">
+                        <img src={this.props.pokemon.pic} id='pokepic'></img>
+                    </div>
                 </div>
             </div>
         )
