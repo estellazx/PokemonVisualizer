@@ -91,3 +91,11 @@ h3{
 .loadingName {
 	color: white;
 }
+
+p {
+	display: inline;
+}
+
+#typeondex{
+	display: inline-block;
+}
