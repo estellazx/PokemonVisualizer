@@ -20,7 +20,7 @@ export default class GetPoke extends Component {
     fetchPoke(endpoint, callback) {
         var x;
         var arr = [];
-        var max = 300;
+        var max = 400;
         for(x = 1; x <= max; x++) {
             var url = this.BASE_URL + "/api/v1/pokemon/" + x + "/";
             axios.get(url)
@@ -99,7 +99,7 @@ class Results extends Component {
     render() {
         const typelist = this.props.pokemon.type.map((type,index) => {
             return (
-                <Link key={index} to={`/type/${type.name}`}>{type.name}{' '}</Link>
+                <Link key={index} to={`/type/${type.name}`}>{type.name}</Link>
             )
         });
         return (

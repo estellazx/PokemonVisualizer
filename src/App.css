@@ -92,10 +92,6 @@ h3{
 	color: white;
 }
 
-p {
-	display: inline;
-}
-
-#typeondex{
-	display: inline-block;
+.moreinfo a{
+	margin-right: 8px;
 }
