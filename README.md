@@ -1,1 +1,2 @@
-Pokemon stats visualizer, Used to order pokemon based off stats
+Practice React project 
+Pokemon stats visualizer ranks pokemon based off stats
