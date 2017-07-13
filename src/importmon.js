@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import {Link} from 'react-router-dom';
 //////////////////////////////////////////////////////
 
 export default class GetPoke extends Component {
@@ -18,7 +19,9 @@ export default class GetPoke extends Component {
     }
     fetchPoke(endpoint, callback) {
         var x;
-        for(x = 1; x <= 151; x++) {
+        var arr = [];
+        var max = 2;
+        for(x = 1; x <= max; x++) {
             var url = this.BASE_URL + "/api/v1/pokemon/" + x + "/";
             axios.get(url)
             .then((response) => {
@@ -26,13 +29,13 @@ export default class GetPoke extends Component {
                 var x, y; 
                 var type = '';
                 var ability = '';
-                for(x = 0; x < response.data.types.length; x++){
-                    if(x===0){
-                        type += response.data.types[x].name;
-                    } else{
-                        type += ", " + response.data.types[x].name;
-                    }
-                }
+                // for(x = 0; x < response.data.types.length; x++){
+                //     if(x===0){
+                //         type += response.data.types[x].name;
+                //     } else{
+                //         type += ", " + response.data.types[x].name;
+                //     }
+                // }
                 for(y = 0; y < response.data.abilities.length; y++){
                     if(y===0){
                         ability += response.data.abilities[y].name;
@@ -55,16 +58,22 @@ export default class GetPoke extends Component {
                     spd: response.data.speed,
                     ability: ability,
                     height: response.data.height,
-                    type: type
+                    type: response.data.types
                 }
-                this.addList(obj);
+                this.props.updatePoke(response.data.name);
+                arr.push(obj);
+                if(arr.length === max){
+                    this.addList(arr);
+                }
+                //this.addList(obj);
             })
         }
+        
     }
     addList(pokemon) {
-        //console.log([pokemon]);
+        this.props.finishLoading();
         this.setState({
-            list: this.state.list.concat([pokemon])
+            list: pokemon 
         })
     }
     render(){
@@ -81,8 +90,8 @@ class DisplayList extends Component {
         //this.setState({list: sorted})
         const pokelist = sorted.map( (pokemon,index) => {
             return (
-              <div id='row' key={index}>
-                <DisplayListInfo pokemon={pokemon} key={index} rank={index}/>
+              <div id='row' key={pokemon.id}>
+                <DisplayListInfo pokemon={pokemon} key={pokemon.id} rank={index}/>
               </div>
             )
         });
@@ -96,10 +105,17 @@ class DisplayList extends Component {
 
 class Results extends Component {
     render() {
+        const typelist = this.props.pokemon.type.map((type,index) => {
+            console.log(type.name);
+            return (
+                <Link key={type.name} to={`/type/${type.name}`}>{type.name}</Link>
+            )
+        });
+        //console.log("typeliost" +typelist[0]);
         return (
             <div id="results" className="search-results">
                 <h4 id="res_type" className='moreinfo'>
-                    {"Type: " + this.props.pokemon.type}
+                    Type: {typelist}
                 </h4>
                 <h4 id="res_ability" className='moreinfo'>
                     {"Abilities: " + this.props.pokemon.ability}
@@ -158,3 +174,5 @@ class DisplayListInfo extends Component {
     }
 }
 
+
+ // <Link to={`/type/${type.name}`}>{type.name}</Link>

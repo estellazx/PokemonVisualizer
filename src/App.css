@@ -78,3 +78,16 @@ h3{
 	width: 300px;
 	/*width: 30%;*/
 }
+
+.background {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background-color: #181b1d;
+	position: fixed;
+}
+
+.loadingName {
+	color: white;
+}
