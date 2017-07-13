@@ -47,8 +47,19 @@ export default class TypePage extends Component {
             )
         });
         return(
-            <div>
-                {halffromlist}
+            <div className="outerdiv">
+                <div className="todiv">
+                    <div className="sto">
+                    </div>
+                    <div className="wto">
+                    </div>
+                </div>
+                <div className="fromdiv">
+                    <div className="sfrom">
+                    </div>
+                    <div className="wfrom">
+                    </div>
+                </div>
             </div>
         );
     }

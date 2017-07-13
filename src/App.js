@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './typePage.css';
 import Main from './Main.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TypePage from './typePage.js';

@@ -1,0 +1,49 @@
+.outerdiv {
+	height: 500px;
+	border: solid black;
+	white-space: nowrap;
+}
+
+.todiv {
+	height: 50%;
+	border: solid red;
+	white-space: nowrap;
+}
+
+.fromdiv {
+	height: 50%;
+	border: solid blue;
+	white-space: nowrap;
+}
+
+.sto {
+	width: 50%;
+	height: 100%;
+	border: solid green;
+	/*float: left;*/
+	display: inline-block;
+}
+
+.wto {
+	width: 50%;
+	height: 100%;
+	border: solid yellow;
+	/*float: right;*/
+	display: inline-block;
+}
+
+.sfrom {
+		width: 50%;
+	height: 100%;
+	border: solid gray;
+	/*float: left;*/
+	display: inline-block;
+}
+
+.wfrom {
+	width: 50%;
+	height: 100%;
+	border: solid purple;
+	/*float: left;*/
+	display: inline-block;
+}
